@@ -40,7 +40,13 @@ select_num = 3
 retrieval_num = 3
 
 # LLM key
-glm_key = ''
+from langchain_openai import ChatOpenAI
+
+model = ChatOpenAI(
+    model="deepseek-chat",
+    api_key="你的DeepSeek key",
+    base_url="https://api.deepseek.com",
+)
 
 # prompt
 prompt_template = """

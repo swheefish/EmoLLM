@@ -1,44 +1,21 @@
-import time
-import jwt
+import os
 from langchain_openai import ChatOpenAI
-from config.config import glm_key
 
 
 def get_glm(
-        model_name='glm-4',
-        api_base="https://open.bigmodel.cn/api/paas/v4",
+        model_name='deepseek-chat',              # ← 改模型
+        api_base="https://api.deepseek.com",     # ← 改地址
         temprature=0.7,
         streaming=False,
     ):
-    """
-
-    """
+    """用 DeepSeek 替代智谱"""
 
     llm = ChatOpenAI(
         model_name=model_name,
         openai_api_base=api_base,
-        openai_api_key=generate_token(glm_key),
+        openai_api_key=os.getenv("DEEPSEEK_API_KEY"),  # ← 用环境变量
         streaming=streaming,
         temperature=temprature
     )
 
-    return llm 
-
-def generate_token(apikey: str, exp_seconds: int=100):
-    try:
-        id, secret = apikey.split(".")
-    except Exception as e:
-        raise Exception("invalid apikey", e)
- 
-    payload = {
-        "api_key": id,
-        "exp": int(round(time.time() * 1000)) + exp_seconds * 1000,
-        "timestamp": int(round(time.time() * 1000)),
-    }
- 
-    return jwt.encode(
-        payload,
-        secret,
-        algorithm="HS256",
-        headers={"alg": "HS256", "sign_type": "SIGN"},
-    )
+    return llm

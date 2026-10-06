@@ -2,7 +2,7 @@ sentence_transformers
 transformers
 numpy
 loguru
-torch
+torch @ https://download.pytorch.org/whl/cpu/torch-2.2.0%2Bcpu-cp310-cp310-linux_x86_64.whl
 langchain==0.1.13
 langchain_community==0.0.29
 langchain_core==0.1.33
@@ -11,4 +11,4 @@ langchain_text_splitters==0.0.1
 FlagEmbedding==1.2.8
 unstructured==0.12.6
 PyJWT
-faiss-gpu  # faiss-cpu for device without gpu
+faiss-cpu  # faiss-cpu for device without gpu

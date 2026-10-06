@@ -4,7 +4,7 @@ import os
 
 from loguru import logger
 from langchain_community.vectorstores import FAISS
-from rag.src.config.config import (
+from config.config import (
     embedding_path,
     embedding_model_name,
     doc_dir, qa_dir,
@@ -217,7 +217,7 @@ class Data_process():
         if not os.path.exists(vector_db_dir) or not os.listdir(vector_db_dir):
             db = self.create_vector_db(emb_model)
         else:
-            db = FAISS.load_local(vector_db_dir, emb_model)
+            db = FAISS.load_local(vector_db_dir, emb_model, allow_dangerous_deserialization=True)
         return db
     
 if __name__ == "__main__":
